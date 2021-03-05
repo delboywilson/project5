@@ -4,6 +4,11 @@
   "description": "INCODE2 Project 5 - Consume an API #First change to the project by Iulia",
   "main": "index.js",
   "scripts": {
+    "create-database": "createdb project5",
+    "drop-database": "dropdb project5",
+    "create-tables": "psql -h localhost -d project5 -f sql/create-tables.sql",
+    "seed-tables": "psql -h localhost -d project5 -f sql/seed-tables.sql",
+    "dev": "nodemon -e js,ejs,css app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
