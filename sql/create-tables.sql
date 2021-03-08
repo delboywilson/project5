@@ -1,26 +1,19 @@
--- to test db connection only
-
 DROP TABLE IF EXISTS users;
 
  CREATE TABLE IF NOT EXISTS users (
-    user_id INT GENERATED ALWAYS AS IDENTITY,
-    last_name VARCHAR(50) NOT NULL, 
-    first_name VARCHAR(50) NOT NULL, 
-    email VARCHAR(50) NOT NULL UNIQUE, 
-    password VARCHAR(100) NOT NULL, 
-    PRIMARY KEY (user_id)
+    id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    username VARCHAR(50) NOT NULL,
+    first_name VARCHAR(50) NOT NULL,
+    last_name VARCHAR(50) NOT NULL,
+    email VARCHAR(50) NOT NULL UNIQUE,
+    password VARCHAR(100) NOT NULL
 );
 
-DROP TABLE IF EXISTS schedules;
+DROP TABLE IF EXISTS ratings;
 
-  CREATE TABLE IF NOT EXISTS schedules (
-    schedule_id INT GENERATED ALWAYS AS IDENTITY,
-    id_user INT,
-    day NUMERIC(1) NOT NULL, 
-    start_time TIMESTAMPTZ NOT NULL, 
-    end_time TIMESTAMPTZ NOT NULL,
-    PRIMARY KEY(schedule_id),
-    CONSTRAINT fk_ID
-      FOREIGN KEY(ID_user) 
-        REFERENCES users (user_id)
+  CREATE TABLE IF NOT EXISTS ratings (
+    id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    movie_id INT,
+    rating SMALLINT NOT NULL,
+    user_id INT REFERENCES users (id)
 );
