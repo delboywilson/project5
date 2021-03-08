@@ -26,6 +26,7 @@ const detailsRouter = require("./routes/details");
 const confirmRouter = require("./routes/confirm");
 const errorRouter = require("./routes/error");
 const logoutRouter = require("./routes/logout");
+const notFoundRouter = require("./routes/notFound");
 
 app.use("/", indexRouter);
 app.use("/login", loginRouter);
@@ -35,6 +36,7 @@ app.use("/details", detailsRouter);
 app.use("/confirm", confirmRouter);
 app.use("/error", errorRouter);
 app.use("/logout", logoutRouter);
+app.use("*", notFoundRouter);
 
 app.listen(PORT, () => {
   console.log(`server is listening on localhost${PORT}`);
