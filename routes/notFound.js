@@ -1,9 +1,8 @@
 const express = require("express");
 const router = express.Router();
 
-router.get("/", (req, res) => {
-  res.render("pages/error", {
-    err: err,
-  });
+router.get("*", (req, res) => {
+  res.render("pages/notFound");
 });
+
 module.exports = router;
