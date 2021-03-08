@@ -16,5 +16,3 @@ INCODE2 Project 5 - Consume an API
 <a href="https://github.com/delboywilson">
   <img src="https://github.com/delboywilson.png" alt="Derek Wilson" width="100"/>
 </a>
-
-This is to test Stan's pull request
