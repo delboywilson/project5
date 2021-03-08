@@ -8,7 +8,6 @@ const session = require("express-session");
 const { JSDOM } = require("jsdom");
 const { window } = new JSDOM("");
 const $ = require("jquery")(window);
-// const bootstrap = require("bootstrap");
 const app = express();
 const PORT = process.env.PORT;
 
@@ -19,10 +18,6 @@ app.use("/static", express.static(path.join(__dirname, "public")));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(expressLayouts);
-
-// app.use("/css", express.static(path.join(_dirname, "node_modules/bootstrap/dist/css")));
-// app.use("/js", express.static(path.join(_dirname, "node_modules/bootstrap/dist/js")));
-// app.use("/js", express.static(path.join(_dirname, "node_modules/jquery/dist")));
 
 // routes
 
