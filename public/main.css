@@ -11,6 +11,7 @@ footer {
   position: fixed;
   width: 100%;
   font-weight: 400;
+  background-color: lightgray;
   align-items: center;
   justify-content: center;
   bottom: 0;
