@@ -4,6 +4,7 @@ const bcrypt = require("bcrypt");
 const passport = require("passport");
 const flash = require("express-flash");
 const initializePassport = require("../passport-config");
+const { checkNotAuthenticated } = require("../middleware");
 
 initializePassport(
   passport,
@@ -12,7 +13,12 @@ initializePassport(
 );
 
 const users = [
-  { id: 1, name: "Alex", email: "alex@gmail.com", password: "Hello1" },
+  {
+    id: 1,
+    name: "Alex",
+    email: "alex@gmail.com",
+    password: "$2b$10$MKuAv.R8GdJbZHMAOeh4fuSvHLbv86PWrANegLoEeT92sHVKlFhGy",
+  },
   { id: 2, name: "Mila", email: "mila@gmail.com", password: "Hello1" },
   { id: 3, name: "Milo", email: "milo@gmail.com", password: "Hello1" },
 ];
