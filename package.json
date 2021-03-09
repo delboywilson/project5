@@ -32,6 +32,8 @@
     "express-flash": "0.0.2",
     "express-session": "^1.17.1",
     "express-validator": "^6.10.0",
+    "jquery": "^3.6.0",
+    "jsdom": "^16.5.0",
     "local": "^0.3.3",
     "method-override": "^3.0.0",
     "morgan": "^1.10.0",
