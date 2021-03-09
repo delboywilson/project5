@@ -15,11 +15,3 @@ router.delete("/", (req, res) => {
 });
 
 module.exports = router;
-
-// app.get('/logout', function(req, res){
-//   console.log(req.isAuthenticated());
-//   req.logout();
-//   console.log(req.isAuthenticated());
-//   req.flash('success', "Logged out. See you soon!");
-//   res.redirect('/');
-//   });
