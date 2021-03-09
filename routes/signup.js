@@ -3,7 +3,7 @@ const router = express.Router();
 const bcrypt = require('bcrypt');
 const passport = require('passport');
 const flash = require('express-flash')
-const initializePassport = require('./passport-config')
+const initializePassport = require('../passport-config')
 
 
 const users = [
