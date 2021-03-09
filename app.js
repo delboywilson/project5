@@ -41,17 +41,17 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(expressLayouts);
 app.use(flash());
-app.use(passport.initialize());
-app.use(passport.session());
-app.use(
-  session({
-    //we are going totake it from our environment variables
-    secret: process.env.SESSION_SECRET,
-    resave: false,
-    saveUninitialized: false,
-  })
-);
-app.use(methodOverride("_method"));
+app.use(passport.initialize())
+app.use(passport.session())
+app.use(methodOverride('_method'))
+
+app.use(session({
+  //we are going totake it from our environment variables
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: false
+}))
+
 // routes
 
 const indexRouter = require("./routes/index");
