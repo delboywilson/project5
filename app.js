@@ -43,20 +43,17 @@ app.use(expressLayouts);
 app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(methodOverride("_method"));
+
 app.use(
   session({
-    key: "user_sid",
     //we are going totake it from our environment variables
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
-    cookie: {
-      expires: 3600000,
-      sameSite: true,
-    },
   })
 );
-app.use(methodOverride("_method"));
+
 // routes
 
 const indexRouter = require("./routes/index");

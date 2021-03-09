@@ -4,8 +4,9 @@ const bcrypt = require("bcrypt");
 const passport = require("passport");
 const flash = require("express-flash");
 const initializePassport = require("../passport-config");
-const { checkNotAuthenticated } = require("../middleware");
+const db = require("../database");
 
+//function to find a user based on the email
 initializePassport(
   passport,
   (email) => users.find((user) => user.email === email),
@@ -20,13 +21,14 @@ const users = [
     password: "$2b$10$MKuAv.R8GdJbZHMAOeh4fuSvHLbv86PWrANegLoEeT92sHVKlFhGy",
   },
   { id: 2, name: "Mila", email: "mila@gmail.com", password: "Hello1" },
-  { id: 3, name: "Milo", email: "milo@gmail.com", password: "Hello1" },
+  { id: 3, name: "Milo", email: "milo@gmail.com", password: "1" },
 ];
 
 router.get("/", (req, res) => {
   res.render("pages/login");
 });
 
+// post route for login form
 router.post(
   "/",
   passport.authenticate("local", {
