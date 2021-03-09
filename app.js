@@ -18,6 +18,18 @@ app.use("/static", express.static(path.join(__dirname, "public")));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(expressLayouts);
+app.use(
+  session({
+    key: "user_sid",
+    secret: secret,
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      expires: 3600000,
+      sameSite: true,
+    },
+  })
+);
 
 // routes
 
@@ -30,6 +42,7 @@ const confirmRouter = require("./routes/confirm");
 const errorRouter = require("./routes/error");
 const logoutRouter = require("./routes/logout");
 const notFoundRouter = require("./routes/notFound");
+const { secret } = require("./config");
 
 app.use("/", indexRouter);
 app.use("/login", loginRouter);
