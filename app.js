@@ -41,16 +41,18 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(expressLayouts);
 app.use(flash());
-app.use(passport.initialize())
-app.use(passport.session())
-app.use(methodOverride('_method'))
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(methodOverride("_method"));
 
-app.use(session({
-  //we are going totake it from our environment variables
-  secret: process.env.SESSION_SECRET,
-  resave: false,
-  saveUninitialized: false
-}))
+app.use(
+  session({
+    //we are going totake it from our environment variables
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+  })
+);
 
 // routes
 
@@ -76,21 +78,6 @@ app.use("/confirm", confirmRouter);
 app.use("/error", errorRouter);
 app.use("/logout", logoutRouter);
 app.use("*", notFoundRouter);
-
-//middleware
-function checkAuthenticated(req, res, next) {
-  if (req.isAuthenticated()) {
-    return next();
-  }
-  res.redirect("/login");
-}
-
-function checkNotAuthenticated(req, res, next) {
-  if (req.isAuthenticated()) {
-    return res.redirect("/");
-  }
-  next();
-}
 
 app.listen(PORT, () => {
   console.log(`server is listening on localhost${PORT}`);
