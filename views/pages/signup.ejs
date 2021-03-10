@@ -1,18 +1,31 @@
 <h1>Create an account</h1>
-
+<ul>
+    <% if (typeof errors !='undefined' ) { %>
+        <% errors.forEach(error=> { %>
+            <li>
+                <%= error.message %>
+            </li>
+            <% }) %>
+                <% } %>
+</ul>
 <div>
 
     <form class="form" action="/signup" method="POST">
         <div>
-            <label class="form-label" for="firstname">First name</label>
-            <input class="form-input" type="text" id="firstname" name="firstname">
-            <p class="alert hidden">Not valid.</p>
+            <label class="form-label" for="username">Username</label>
+            <input class="form-input" type="text" id="username" name="username">
+            <p class="alert hidden">Not valid</p>
+        </div>
+        <div>
+            <label class="form-label" for="first_name">First name</label>
+            <input class="form-input" type="text" id="first_name" name="first_name">
+            <p class="alert hidden">Not valid</p>
         </div>
 
         <div>
-            <label class="form-label" for="lastname">Last name</label>
-            <input class="form-input" type="text" id="lastname" name="lastname">
-            <p class="alert hidden">Not valid.</p>
+            <label class="form-label" for="last_name">Last name</label>
+            <input class="form-input" type="text" id="last_name" name="last_name">
+            <p class="alert hidden">Not valid</p>
         </div>
 
         <div>
@@ -28,7 +41,12 @@
             <p class="alert hidden">Not valid</p>
         </div>
 
+        <div>
+            <label class="form-label" for="password2">Confirm password</label>
 
+            <input class="form-input" type="password2" id="password2" name="password2">
+            <p class="alert hidden">Not valid</p>
+        </div>
         <button type="submit" class="button">Submit</button>
         </ul>
     </form>
