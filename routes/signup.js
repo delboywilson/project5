@@ -4,31 +4,79 @@ const bcrypt = require("bcrypt");
 const passport = require("passport");
 const flash = require("express-flash");
 const initializePassport = require("../passport-config");
+const { pool } = require("../database");
 
-const users = [
-  { id: 1, name: "Alex", email: "alex@gmail.com", password: "Hello1" },
-  { id: 2, name: "Mila", email: "mila@gmail.com", password: "Hello1" },
-  { id: 3, name: "Milo", email: "milo@gmail.com", password: "Hello1" },
-];
+
 router.get("/", (req, res) => {
   res.render("pages/signup");
 });
 
 router.post("/signup", async (req, res) => {
-  try {
-    const hashedPassword = await bcrypt.hash(req.body.password, 10);
-    users.push({
-      id: Date.now().toString(),
-      firstname: req.body.firstname,
-      lastname: req.body.lastname,
-      email: req.body.email,
-      password: hashedPassword,
-    });
-    res.redirect("/login");
-  } catch {
-    res.redirect("/signup");
+  let { username, firstname, lastname, email, password, password2 } = req.body;
+  //empty array to push errors from form validation
+  let errors = [];
+  console.log({
+    username,
+    firstname,
+    lastname,
+    email,
+    password,
+    password2
+  });
+
+
+
+  //first check that all fields are not empty
+  if (!username || !firstname || !lastname || !email || !password || !password2) {
+    errors.push({ message: "Please enter all fields" });
   }
-  console.log(users);
+  if (password.length < 6) {
+    errors.push({ message: "Password should be at least 6 characters long" })
+  }
+  if (password !== password2) {
+    errors.push({ message: "Passwords do not match" })
+  }
+
+  //if any checks above pushed any errors in the array, so if any check failed
+  if (errors.length > 0) {
+    res.render('pages/signup', { errors });
+  } else {
+    //Form validation has passed 
+
+    let hashedPassword = await bcrypt.hash(password, 10);
+    console.log(hashedPassword);
+    //check if a user exists in the database
+    pool.query(
+      `SELECT * FROM users
+      WHERE email = $1`, [email], (err, results) => {
+      if (err) {
+        throw err
+      }
+      //return the list of users that are actually in the database
+      console.log(results.rows);
+      if (results.rows.length > 0) {
+        errors.push({ message: "Email already registered" });
+        res.render('pages/signup', { errors });
+      } else {
+        //there is no user in the database and we can register the user
+        pool.query(
+          `INSERT INTO users (username, first_name, last_name, email, password) 
+          VALUES ($1, $2, $3, $4)
+          RETURNING id, password`, [username, first_name, last_name, email, hashedPassword],
+          (err, results) => {
+            if (err) {
+              throw err
+            }
+            console.log(results.rows);
+            req.flash('success_msg', "You are now registered. Please log in");
+            res.redirect('pages/login');
+          }
+        );
+      }
+    }
+    );
+  }
 });
+
 
 module.exports = router;
