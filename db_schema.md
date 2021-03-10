@@ -12,6 +12,6 @@ ratings
 
 | id | movie_id | rating | user_id |
 |----|----------|--------|---------|
-|    |          |        |         |
+|    |  (API)   |        |         |
 
 `user_id` column in `ratings` table references `id` in `users` table
