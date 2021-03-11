@@ -1,18 +1,30 @@
 <h1>Login Page</h1>
-<% if (messages.error) { %> <%= messages.error %> <% } %>
+<% if (messages.error) { %>
+  <%= messages.error %>
+    <% } %>
 
-<ul>
-  <% if(messages.success_msg) { %>
-  <li><%= messages.success_msg %></li>
-  <% } %>
-</ul>
+      <ul>
+        <% if(messages.success_msg) { %>
+          <li>
+            <%= messages.success_msg %>
+          </li>
+          <% } %>
+      </ul>
 
-<ul>
-  <% if (messages.error) { %>
-  <li><%= messages.error %></li>
-  <% } %>
-</ul>
-
+      <ul>
+        <% if (messages.error) { %>
+          <li>
+            <%= messages.error %>
+          </li>
+          <% } %>
+      </ul>
+      <ul>
+        <% if(messages.success_msg) { %>
+          <li>
+            <%= messages.success_msg %>
+          </li>
+          <% } %>
+      </ul>
 
 <form class="form" method="POST" action="/login">
   <div class="row mb-3">
