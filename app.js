@@ -33,15 +33,20 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(expressLayouts);
 app.use(flash());
+
+// Funtion inside passport which initializes passport
 app.use(passport.initialize());
+// Store our variables to be persisted across the whole session. Works with app.use(Session) above
 app.use(passport.session());
 app.use(methodOverride("_method"));
 
 app.use(
   session({
-    //we are going totake it from our environment variables
+    // Key we want to keep secret which will encrypt all of our information
     secret: process.env.SESSION_SECRET,
+    // Should we resave our session variables if nothing has changes which we dont
     resave: false,
+    // Save empty value if there is no vaue which we do not want to do
     saveUninitialized: false,
   })
 );
@@ -59,6 +64,7 @@ const logoutRouter = require("./routes/logout");
 const notFoundRouter = require("./routes/notFound");
 const { secret } = require("./config");
 
+//what is it?
 const e = require("express");
 
 app.use("/", indexRouter);

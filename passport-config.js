@@ -11,17 +11,18 @@ function initialize(passport) {
     const authenticateUser = (email, password, done) => {
         console.log(email, password);
         pool.query(
-            'SELECT * FROM users WHERE email = $1',
+            `SELECT * FROM users WHERE email = $1`,
             [email],
             (err, results) => {
                 if (err) {
                     console.log(err);
                 }
-                console.log(results.rows);
+                //console.log(results.rows);
                 //user is found in the database
                 if (results.rows.length > 0) {
                     const user = results.rows[0];
-                    bcrypt.cpmpare(password, user.password, (err, isMatch) => {
+
+                    bcrypt.compare(password, user.password, (err, isMatch) => {
                         if (err) {
                             throw err
                         }
@@ -57,7 +58,7 @@ function initialize(passport) {
     // In deserializeUser that key is matched with the in memory array / database or any data resource.
     // The fetched object is attached to the request object as req.user
     passport.deserializeUser((id, done) => {
-        pool.query('SELECT * FROM users WHERE id = $1', [id], (err, results) => {
+        pool.query(`SELECT * FROM users WHERE id = $1`, [id], (err, results) => {
             if (err) {
                 return done(err);
             }

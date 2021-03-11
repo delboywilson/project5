@@ -12,13 +12,13 @@ router.get("/", (req, res) => {
 });
 
 router.post("/signup", async (req, res) => {
-  let { username, firstname, lastname, email, password, password2 } = req.body;
+  let { username, first_name, last_name, email, password, password2 } = req.body;
   //empty array to push errors from form validation
   let errors = [];
   console.log({
     username,
-    firstname,
-    lastname,
+    first_name,
+    last_name,
     email,
     password,
     password2
@@ -27,7 +27,7 @@ router.post("/signup", async (req, res) => {
 
 
   //first check that all fields are not empty
-  if (!username || !firstname || !lastname || !email || !password || !password2) {
+  if (!username || !first_name || !last_name || !email || !password || !password2) {
     errors.push({ message: "Please enter all fields" });
   }
   if (password.length < 6) {
@@ -61,7 +61,7 @@ router.post("/signup", async (req, res) => {
         //there is no user in the database and we can register the user
         pool.query(
           `INSERT INTO users (username, first_name, last_name, email, password) 
-          VALUES ($1, $2, $3, $4)
+          VALUES ($1, $2, $3, $4, $5)
           RETURNING id, password`, [username, first_name, last_name, email, hashedPassword],
           (err, results) => {
             if (err) {
@@ -69,11 +69,12 @@ router.post("/signup", async (req, res) => {
             }
             console.log(results.rows);
             req.flash('success_msg', "You are now registered. Please log in");
-            res.redirect('pages/login');
+            res.redirect('/login');
           }
         );
       }
     }
+
     );
   }
 });
