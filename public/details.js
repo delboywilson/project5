@@ -35,7 +35,4 @@ async function getMovie() {
   </div>
   `;
   $("#movie").html(output);
-
-  // let img = "https://image.tmdb.org/t/p/w500${result.poster_path}";
-  // $("#test").html(img);
 }
