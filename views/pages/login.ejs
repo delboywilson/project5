@@ -18,21 +18,6 @@
           </li>
           <% } %>
       </ul>
-
-      <div>
-        <form class="form" method="POST" action="/login">
-          <div>
-            <label class="form-label" for="email">Email</label>
-            <input class="form-input" type="email" id="email" name="email" required />
-          </div>
-          <div>
-            <label class="form-label" for=" password">Password</label>
-            <input class="form-input" type="password" id="password" name="password" required />
-          </div>
-          <button class="button" type="submit">Login</button>
-        </form>
-      </div>
-
       <ul>
         <% if(messages.success_msg) { %>
           <li>
@@ -48,7 +33,6 @@
           </li>
           <% } %>
       </ul>
-
       <div>
         <form class="form" method="POST" action="/login">
           <div>

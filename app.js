@@ -18,6 +18,7 @@ const flash = require("express-flash");
 const initializePassport = require("./passport-config");
 const passport = require("passport");
 const methodOverride = require("method-override");
+const expressValidator = require('express-validator');
 
 //function to find a user based on the email
 initializePassport(passport);
@@ -31,6 +32,7 @@ app.use(morgan("dev"));
 app.use("/static", express.static(path.join(__dirname, "public")));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(expressValidator());
 app.use(expressLayouts);
 app.use(flash());
 
