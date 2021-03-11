@@ -14,7 +14,8 @@ function initialize(passport) {
       [email],
       (err, results) => {
         if (err) {
-          console.log(err);
+            console.log(err);
+            return done(err);
         }
         console.log(results.rows);
         //user is found in the database
