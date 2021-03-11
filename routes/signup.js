@@ -47,12 +47,15 @@ router.post("/", async (req, res) => {
   if (password !== password2) {
     errors.push({ message: "Passwords do not match" });
   }
-
+    if (email == /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/i) {
+    errors.push({ message: "Please enter a valid email" });
+  }
   //if any checks above pushed any errors in the array, so if any check failed
   if (errors.length > 0) {
     res.render("pages/signup", { errors });
   } else {
     //Form validation has passed
+    //Back-end validation
 
     let hashedPassword = await bcrypt.hash(password, 10);
     console.log(hashedPassword);
@@ -91,5 +94,6 @@ router.post("/", async (req, res) => {
     );
   }
 });
+
 
 module.exports = router;
