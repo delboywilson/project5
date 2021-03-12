@@ -2,12 +2,12 @@
   "name": "project5",
   "version": "1.0.0",
   "description": "INCODE2 Project 5 - Consume an API #First change to the project by Iulia",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "create-database": "psql -U postgres -h localhost -p 3000 -f sql/create-database.sql",
+    "create-database": "psql -U mohua -h localhost -p 5432 -f sql/create-database.sql",
     "drop-database": "dropdb project5",
-    "create-tables": "psql -U postgres -h localhost -p 3000 -d project5 -f sql/create-tables.sql",
-    "seed-tables": "psql -U postgres -h localhost -p 3000 -d project5 -f sql/seed-tables.sql",
+    "create-tables": "psql -U mohua -h localhost -p 5432 -d project5 -f sql/create-tables.sql",
+    "seed-tables": "psql -U mohua -h localhost -p 5432 -d project5 -f sql/seed-tables.sql",
     "dev": "nodemon -e js,ejs,css app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
