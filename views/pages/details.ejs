@@ -31,17 +31,34 @@
 
   <div class="container">
     <div class="well" id="movie">
-      <!-- <div class="card col-sm" style="width: 18rem">
-        <img src="..." class="card-img-top" alt="..." />
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
-          </p>
-          <a href="#" class="btn btn-primary">Go somewhere</a>
+      <div class="row">
+        <div class="col-md-6">
+          <img src="..." class="movie-poster" />
         </div>
-      </div> -->
+        <div class="col-md-4">
+          <ul class="list-group">
+            <li class="list-group-item"><h2 class="movie-title">Title</h2></li>
+            <li class="list-group-item">
+              <strong>Genre:</strong>
+              <div class="genre">Genre</div>
+            </li>
+            <li class="list-group-item">
+              <strong>Release Date:</strong>
+              <div class="release-date">Release Date</div>
+            </li>
+          </ul>
+          <hr />
+          <div class="well">
+            <h3>Overview</h3>
+            <div class="overview">overview</div>
+            <hr />
+            RATING FUNCTION GOES HERE
+          </div>
+          <a href="/home" class="btn btn-default" onclick="history.back(-1)"
+            >Search and rate another!</a
+          >
+        </div>
+      </div>
     </div>
   </div>
 
