@@ -18,7 +18,7 @@ const flash = require("express-flash");
 const initializePassport = require("./passport-config");
 const passport = require("passport");
 const methodOverride = require("method-override");
-const expressValidator = require('express-validator');
+
 
 //function to find a user based on the email
 initializePassport(passport);
@@ -35,9 +35,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(expressLayouts);
 app.use(flash());
 
+
 // Funtion inside passport which initializes passport
 app.use(passport.initialize());
-// Store our variables to be persisted across the whole session. Works with app.use(Session) above
+// Store our variables to be persisted across the whole session. Works with app.use(Session)
 app.use(passport.session());
 app.use(methodOverride("_method"));
 
