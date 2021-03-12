@@ -1,7 +1,7 @@
 if (process.env.NODE_ENV !== "production") {
   require("dotenv").config();
 }
-
+const { pool } = require('./database')
 const express = require("express");
 const path = require("path");
 const db = require("./database");
@@ -19,19 +19,12 @@ const initializePassport = require("./passport-config");
 const passport = require("passport");
 const methodOverride = require("method-override");
 
-//function to find a user based on the email
-initializePassport(
-  passport,
-  (email) => users.find((user) => user.email === email),
-  (id) => users.find((user) => user.id === id)
-);
 
-const users = [
-  { id: 1, name: "Alex", email: "alex@gmail.com", password: "Hello1" },
-  { id: 2, name: "Mila", email: "mila@gmail.com", password: "Hello1" },
-  { id: 3, name: "Milo", email: "milo@gmail.com", password: "Hello1" },
-]; //to store users whithout the database
-const PORT = 3003;
+//function to find a user based on the email
+initializePassport(passport);
+
+//to store users whithout the database
+const PORT = process.env.PORT || 3003;
 
 app.set("view engine", "ejs");
 
@@ -43,15 +36,21 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(expressLayouts);
 app.use(flash());
+
+
+// Funtion inside passport which initializes passport
 app.use(passport.initialize());
+// Store our variables to be persisted across the whole session. Works with app.use(Session)
 app.use(passport.session());
 app.use(methodOverride("_method"));
 
 app.use(
   session({
-    //we are going totake it from our environment variables
+    // Key we want to keep secret which will encrypt all of our information
     secret: process.env.SESSION_SECRET,
+    // Should we resave our session variables if nothing has changes which we dont
     resave: false,
+    // Save empty value if there is no vaue which we do not want to do
     saveUninitialized: false,
   })
 );
@@ -69,6 +68,7 @@ const logoutRouter = require("./routes/logout");
 const notFoundRouter = require("./routes/notFound");
 const { secret } = require("./config");
 
+//what is it?
 const e = require("express");
 
 app.use("/", indexRouter);

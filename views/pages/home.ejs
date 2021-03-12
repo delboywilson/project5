@@ -11,8 +11,14 @@
                     <a class="nav-link active" aria-current="page" href="#">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Login/Signup</a>
+                    <a class="nav-link" href="/login">Log in</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/signup">Sign up</a>
+                </li>
+                <form action="/logout?_method=DELETE" method="POST">
+                    <button type="submit">Log out</button>
+                </form>
             </ul>
         </div>
     </div>
@@ -21,7 +27,6 @@
     <div class="container-fluid">
         <h3>Find some movies</h3>
     </div>
-
     <nav class="navbar navbar-light bg-light">
         <div class="container-fluid">
             <form class="d-flex">
@@ -34,32 +39,21 @@
 </div>
 
 <div class="container">
-    <div class="row" id="search-result-cards">
 
-        <div class="card col-sm" style="width: 18rem;">
-            <img src="..." class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                    card's content.</p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
-        </div>
-
-        <div class="card col-sm" style="width: 18rem;">
-            <img src="..." class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                    card's content.</p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
+    <div class="row row-cols-1 row-cols-md-3" id="search-result-cards">
+        <div class="col mb-4 movie-card">
+            <div class="card">
+                <img src="..." class="card-img-top movie-img" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title movie-title">Card title</h5>
+                    <p class="card-text movie-description">This is a longer card with supporting text below as a natural lead-in to
+                        additional
+                        content. This content is a little bit longer.</p>
+                    <a href="#" class="btn btn-primary movie-rate-link">Rate the movie</a>
+                </div>
             </div>
         </div>
     </div>
 </div>
-
-<form action="/logout?_method=DELETE" method="POST">
-    <button type="submit">Log out</button>
-</form>
 
 <script type="text/javascript" src="/static/home.js"></script>

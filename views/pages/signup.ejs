@@ -5,11 +5,12 @@
             <li>
                 <%= error.message %>
             </li>
+
         <% }) %>
     <% } %>
+
 </ul>
 <div>
-
     <form class="form" action="/signup" method="POST">
         <div class="row mb-3">
             <label class="col-sm-2 col-form-label" for="username">Username</label>
@@ -68,3 +69,4 @@
 <div class="signup-p">
     <p>If you already have an account, please <a href="/login">login</a>.</p>
 </div>
+<script src="static/js/signup-validation.js"/>
