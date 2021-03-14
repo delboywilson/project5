@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">RateForFriends</a>
+    <a class="navbar-brand" href="/home">RateForFriends</a>
     <button
       class="navbar-toggler"
       type="button"
@@ -15,10 +15,20 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
+          <a class="nav-link active" aria-current="page" href="/home">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Login/Signup</a>
+          <a class="nav-link" href="/login">Log in</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/signup">Sign up</a>
+        </li>
+        <li class="nav-item">
+          <form action="/logout?_method=DELETE" method="POST">
+            <button class="btn btn-default nav-link" type="submit">
+              Log out
+            </button>
+          </form>
         </li>
       </ul>
     </div>
@@ -31,23 +41,65 @@
 
   <div class="container">
     <div class="well" id="movie">
-      <!-- <div class="card col-sm" style="width: 18rem">
-        <img src="..." class="card-img-top" alt="..." />
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
-          </p>
-          <a href="#" class="btn btn-primary">Go somewhere</a>
+      <div class="row">
+        <div class="col-md-6">
+          <img src="..." class="movie-poster" />
         </div>
-      </div> -->
+        <div class="col-md-4">
+          <ul class="list-group">
+            <li class="list-group-item"><h2 class="movie-title">Title</h2></li>
+            <li class="list-group-item">
+              <strong>Genre:</strong>
+              <div class="genre">Genre</div>
+            </li>
+            <li class="list-group-item">
+              <strong>Release Date:</strong>
+              <div class="release-date">Release Date</div>
+            </li>
+          </ul>
+          <hr />
+          <div class="well">
+            <h3>Overview</h3>
+            <div class="overview">overview</div>
+            <hr />
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Movie</th>
+                  <th>Rating</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="initial_rating">
+                  <td class="movie-title">Title</td>
+                  <td>
+                    <div class="stars-outer">
+                      <div class="stars-inner"></div>
+                    </div>
+                    <span class="number-rating"></span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="form-group">
+            <input
+              type="number"
+              id="rating-control"
+              class="form-control"
+              step="0.1"
+              max="5"
+              min="1"
+              placeholder="Rate 1 - 5"
+            />
+          </div>
+          <a href="/home" class="btn btn-default" onclick="history.back(-1)"
+            >Search and rate another!</a
+          >
+        </div>
+      </div>
     </div>
   </div>
-
-  <form action="/logout?_method=DELETE" method="POST">
-    <button type="submit">Log out</button>
-  </form>
 
   <script type="text/javascript" src="/static/details.js"></script>
   <script>
