@@ -23,19 +23,32 @@
         </div>
     </div>
 </nav>
-<div class="container-fluid">
-    <div class="container-fluid">
-        <h3>Find some movies</h3>
-    </div>
-    <nav class="navbar navbar-light bg-light">
-        <div class="container-fluid">
+<div class="container-md">
+    <!-- <div class="container-fluid"> -->
+        <h1 class="my-4">Find some movies</h1>
+    <!-- </div> -->
+    <!-- <nav class="navbar navbar-light bg-light"> -->
+        <!-- <div class="container-fluid"> -->
             <form class="d-flex">
                 <input class="form-control me-2" id="search-field" type="search" placeholder="Search"
                     aria-label="Search">
                 <button class="btn btn-outline-success" id="search-button" type="submit">Search</button>
             </form>
-        </div>
-    </nav>
+        <!-- </div> -->
+    <!-- </nav> -->
+</div>
+
+<div class="container">
+  <div class="row row-cols-1 row-cols-md-3 mt-4 all-filters">
+      <div class="col mb-4 genre-filter">
+        <select class="form-select" aria-label="Default select example">
+            <option selected>Open this select menu</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </select>
+      </div>
+  </div>
 </div>
 
 <div class="container">
@@ -46,9 +59,6 @@
                 <img src="..." class="card-img-top movie-img" alt="...">
                 <div class="card-body">
                     <h5 class="card-title movie-title">Card title</h5>
-                    <p class="card-text movie-description">This is a longer card with supporting text below as a natural lead-in to
-                        additional
-                        content. This content is a little bit longer.</p>
                     <a href="#" class="btn btn-primary movie-rate-link">Rate the movie</a>
                 </div>
             </div>
