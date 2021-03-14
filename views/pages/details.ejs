@@ -18,7 +18,17 @@
           <a class="nav-link active" aria-current="page" href="#">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Login/Signup</a>
+          <a class="nav-link" href="/login">Log in</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/signup">Sign up</a>
+        </li>
+        <li class="nav-item">
+          <form action="/logout?_method=DELETE" method="POST">
+            <button class="btn btn-default nav-link" type="submit">
+              Log out
+            </button>
+          </form>
         </li>
       </ul>
     </div>
@@ -52,7 +62,36 @@
             <h3>Overview</h3>
             <div class="overview">overview</div>
             <hr />
-            RATING FUNCTION GOES HERE
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Movie</th>
+                  <th>Rating</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="initial_rating">
+                  <td class="movie-title">Title</td>
+                  <td>
+                    <div class="stars-outer">
+                      <div class="stars-inner"></div>
+                    </div>
+                    <span class="number-rating"></span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="form-group">
+            <input
+              type="number"
+              id="rating-control"
+              class="form-control"
+              step="0.1"
+              max="5"
+              min="1"
+              placeholder="Rate 1 - 5"
+            />
           </div>
           <a href="/home" class="btn btn-default" onclick="history.back(-1)"
             >Search and rate another!</a
@@ -61,10 +100,6 @@
       </div>
     </div>
   </div>
-
-  <form action="/logout?_method=DELETE" method="POST">
-    <button type="submit">Log out</button>
-  </form>
 
   <script type="text/javascript" src="/static/details.js"></script>
   <script>
