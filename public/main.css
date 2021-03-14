@@ -1,6 +1,8 @@
 * {
-  margin: 10px;
-  border: 10px;
+  /* deleted padding and margin rules
+  they are applied to all the elements on all pages
+  already styled with Bootstrap
+  and break everything */
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   scroll-behavior: smooth;
