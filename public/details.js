@@ -29,44 +29,46 @@ async function getMovie() {
   $(".overview").html(movie.overview);
 }
 
-// Ratings system
+async function averageRating() {
+  try {
+    let average = await $.getJSON("/averageRating");
+    const ratings = average;
 
-// hardcoded
-// initial Ratings need to actually come from db
-// should get all ratings for that movie and do Math to provide a current average rating
-const ratings = {
-  initial_rating: 3.6,
-};
+    console.log(ratings);
+    // Total Stars
+    const starsTotal = 5;
 
-// Total Stars
-const starsTotal = 5;
+    // Run getRatings when DOM loads
+    document.addEventListener("DOMContentLoaded", getRatings);
 
-// Run getRatings when DOM loads
-document.addEventListener("DOMContentLoaded", getRatings);
+    // Form Element
+    const ratingControl = document.getElementById("rating-control");
 
-// Form Element
-const ratingControl = document.getElementById("rating-control");
+    // Get ratings
+    function getRatings() {
+      for (let rating in ratings) {
+        // Get percentage
+        const starPercentage = (ratings[rating] / starsTotal) * 100;
 
-// Get ratings
-function getRatings() {
-  for (let rating in ratings) {
-    // Get percentage
-    const starPercentage = (ratings[rating] / starsTotal) * 100;
+        // Round to nearest 10
+        const starPercentageRounded = `${
+          Math.round(starPercentage / 10) * 10
+        }%`;
 
-    // Round to nearest 10
-    const starPercentageRounded = `${Math.round(starPercentage / 10) * 10}%`;
+        // Set width of stars-inner to percentage
+        document.querySelector(
+          `.${rating} .stars-inner`
+        ).style.width = starPercentageRounded;
 
-    // Set width of stars-inner to percentage
-    document.querySelector(
-      `.${rating} .stars-inner`
-    ).style.width = starPercentageRounded;
-
-    // Add number rating
-    document.querySelector(`.${rating} .number-rating`).innerHTML =
-      ratings[rating];
+        // Add number rating
+        document.querySelector(`.${rating} .number-rating`).innerHTML =
+          ratings[rating];
+      }
+    }
+  } catch (e) {
+    console.log(e);
   }
 }
-
 // need to add function that pushes to rating to the db, then recalls the function to show the updated rating for the movie
 async function getData() {
   try {
@@ -78,7 +80,6 @@ async function getData() {
 }
 
 async function postData() {
-
   try {
     await $.post("/checkdb");
   } catch (e) {
@@ -136,6 +137,8 @@ async function updateRatingBlock() {
 
 // need to add check if user is logged in, else prevent rating and encourage login/signup (maybe just alert - "you need to be logged in to do that"?)
 getMovie();
-getData();
-postData();
+// getData();
+// postData();
+averageRating();
 // updateRatingBlock();
+
