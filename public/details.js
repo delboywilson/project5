@@ -70,7 +70,7 @@ function getRatings() {
 // need to add function that pushes to rating to the db, then recalls the function to show the updated rating for the movie
 async function getData() {
   try {
-    let data = await $.getJSON("/checkdb");
+    let data = await $.getJSON("/ratings");
     console.log(data);
   } catch (e) {
     console.log(e);
@@ -78,9 +78,8 @@ async function getData() {
 }
 
 async function postData() {
-
   try {
-    await $.post("/checkdb");
+    await $.post("/ratings");
   } catch (e) {
     console.log(e);
   }

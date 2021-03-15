@@ -86,9 +86,6 @@ app.get("/ratings", async (req, res) => {
 });
 
 //post ratings to database
-/*let movie_id = 104;
-let rating = 5;
-let user_id = 1;*/
 
 app.post("/ratings", async (req, res) => {
     try {
@@ -106,6 +103,8 @@ app.post("/ratings", async (req, res) => {
     } catch (err) {
         console.log(err);
     }
+
+
 });
 
 app.use("*", notFoundRouter);
