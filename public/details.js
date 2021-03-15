@@ -29,69 +29,44 @@ async function getMovie() {
   $(".overview").html(movie.overview);
 }
 
-// Ratings system
-
-async function sumData() {
-  const ratings = [];
+async function averageRating() {
   try {
-    let sum = await $.getJSON("/sumdb");
-    // console.log(sum);
-    ratings.push(sum);
+    let average = await $.getJSON("/averageRating");
+    const ratings = average;
+
     console.log(ratings);
+    // Total Stars
+    const starsTotal = 5;
 
-    function extractValue(arr, prop) {
-      let extractedValue = [];
+    // Run getRatings when DOM loads
+    document.addEventListener("DOMContentLoaded", getRatings);
 
-      for (let i = 0; i < arr.length; ++i) {
-        // extract value from property
-        extractedValue.push(arr[i][prop]);
+    // Form Element
+    const ratingControl = document.getElementById("rating-control");
+
+    // Get ratings
+    function getRatings() {
+      for (let rating in ratings) {
+        // Get percentage
+        const starPercentage = (ratings[rating] / starsTotal) * 100;
+
+        // Round to nearest 10
+        const starPercentageRounded = `${
+          Math.round(starPercentage / 10) * 10
+        }%`;
+
+        // Set width of stars-inner to percentage
+        document.querySelector(
+          `.${rating} .stars-inner`
+        ).style.width = starPercentageRounded;
+
+        // Add number rating
+        document.querySelector(`.${rating} .number-rating`).innerHTML =
+          ratings[rating];
       }
-      return extractedValue;
     }
-    // passing an array of objects and property 'rating' to extract
-    const result = extractValue(ratings, "rating");
-    console.log(result);
   } catch (e) {
     console.log(e);
-  }
-
-  // let result = ratings.map((a) => a.rating);
-  // let result = ratings.map(({ rating }) => rating);
-  // hardcoded
-  // initial Ratings need to actually come from db
-  // should get all ratings for that movie and do Math to provide a current average rating
-
-  // const ratings = {
-  //   initial_rating: 3.6,
-  // };
-
-  // Total Stars
-  const starsTotal = 5;
-
-  // Run getRatings when DOM loads
-  document.addEventListener("DOMContentLoaded", getRatings);
-
-  // Form Element
-  const ratingControl = document.getElementById("rating-control");
-
-  // Get ratings
-  function getRatings() {
-    for (let rating in ratings) {
-      // Get percentage
-      const starPercentage = (ratings[rating] / starsTotal) * 100;
-
-      // Round to nearest 10
-      const starPercentageRounded = `${Math.round(starPercentage / 10) * 10}%`;
-
-      // Set width of stars-inner to percentage
-      document.querySelector(
-        `.${rating} .stars-inner`
-      ).style.width = starPercentageRounded;
-
-      // Add number rating
-      document.querySelector(`.${rating} .number-rating`).innerHTML =
-        ratings[rating];
-    }
   }
 }
 // need to add function that pushes to rating to the db, then recalls the function to show the updated rating for the movie
@@ -105,7 +80,6 @@ async function getData() {
 }
 
 async function postData() {
-
   try {
     await $.post("/checkdb");
   } catch (e) {
@@ -115,6 +89,6 @@ async function postData() {
 
 // need to add check if user is logged in, else prevent rating and encourage login/signup (maybe just alert - "you need to be logged in to do that"?)
 getMovie();
-getData();
+// getData();
 // postData();
-sumData();
+averageRating();
