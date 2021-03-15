@@ -14,9 +14,9 @@
 		
 
 	
-	<div class="container">
-		<h1>Create an account</h1>
-<form class="form" action="/signup" method="POST">
+	<div class="container mx-auto" style="width: 560px;">
+		<h1 class="text-center">Create an account</h1>
+<form class="form" style="width: 100em;" action="/signup" method="POST">
 		
         <div class="form-group">
             <label class="col-auto col-form-label" for="username">Username</label>
@@ -69,11 +69,11 @@
             </div>
             <!-- <p class="alert hidden">Not valid</p> -->
         </div>
-	<div class="d-grid gap-2 d-md-flex justify-content-md-start">
-		<button type="submit" class="btn btn-primary me-md-2">Submit</button>
-	</div>
-			<div class="signup-p">
-				<p>
+	
+		<button type="submit" class="btn btn-primary mx-auto m-3 ml-auto mr-auto">Submit</button>
+	
+			<div>
+				<p class="text-left">
 					If you already have an account, please <a href="/login">login</a>.
 				</p>
 			</div>
