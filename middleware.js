@@ -12,5 +12,6 @@ const checkNotAuthenticated = (req, res, next) => {
   next();
 };
 
+
 module.exports.checkAuthenticated = checkAuthenticated;
 module.exports.checkNotAuthenticated = checkNotAuthenticated;
