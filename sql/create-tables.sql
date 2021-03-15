@@ -14,6 +14,6 @@ DROP TABLE IF EXISTS ratings;
   CREATE TABLE IF NOT EXISTS ratings (
     id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     movie_id INT,
-    rating SMALLINT NOT NULL,
+    rating DECIMAL NOT NULL,
     user_id INT REFERENCES users (id)
 );
