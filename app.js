@@ -95,9 +95,6 @@ app.get("/averageRating", async (req, res) => {
 });
 
 //post ratings to database
-/*let movie_id = 104;
-let rating = 5;
-let user_id = 1;*/
 
 
 app.post("/ratings", async (req, res) => {
@@ -116,6 +113,8 @@ app.post("/ratings", async (req, res) => {
     } catch (err) {
         console.log(err);
     }
+
+
 });
 
 // APIs for updateRatingBlock() and OTTER FUNCTION
