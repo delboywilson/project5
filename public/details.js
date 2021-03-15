@@ -1,5 +1,5 @@
 async function getMovie() {
-  // get movie ID from url - is this different to getting by params?
+  // get movie ID from url
   let pathname = window.location.pathname;
   let pathname_components = pathname.split("/");
 
@@ -68,5 +68,42 @@ function getRatings() {
 }
 
 // need to add function that pushes to rating to the db, then recalls the function to show the updated rating for the movie
+async function getData() {
+  try {
+    let data = await $.getJSON("/checkdb");
+    console.log(data);
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+async function postData() {
+  try {
+    await $.post("/checkdb");
+  } catch (e) {
+    console.log(e);
+  }
+}
+// let userID = 1;
+
+// document.getElementById("rate-btn").onclick = function () {
+//   if (userID)
+//     pool.query(
+//       `INSERT INTO users (movie_id, rating, user_id)
+// VALUES ($1, $2, $3)`,
+//       [movieID, rating, userID],
+//       (err, results) => {
+//         if (err) {
+//           throw err;
+//         }
+//         console.log(movieID, rating, userID);
+//         req.flash("success_msg", "Movie Rated!");
+//         res.redirect("/login");
+//       }
+//     );
+// };
 
 // need to add check if user is logged in, else prevent rating and encourage login/signup (maybe just alert - "you need to be logged in to do that"?)
+getMovie();
+getData();
+postData();
