@@ -14,7 +14,7 @@ function addCard(movie) { // there go searchResults, later
 
     // change movie-title
     let movie_title = new_card.find(".movie-title")
-    movie_title.html(movie.title)
+    movie_title.html(movie.title) 
 
     // change movie-description
     // let movie_description = new_card.find(".movie-description")
