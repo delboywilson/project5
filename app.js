@@ -80,7 +80,7 @@ app.use("/confirm", confirmRouter);
 app.use("/error", errorRouter);
 app.use("/logout", logoutRouter);
 
-app.get("/checkdb", async (req, res) => {
+app.get("/ratings", async (req, res) => {
   let results = await db.any("SELECT * FROM ratings;");
   res.send(results);
 });
@@ -97,30 +97,36 @@ app.get("/averageRating", async (req, res) => {
 });
 
 //post ratings to database
-/*let movie_id = 104;
-let rating = 5;
-let user_id = 1;*/
 
-app.post("/checkdb", async (req, res) => {
-  try {
-    const newRating = await db.any(
-      "INSERT INTO ratings (movie_id, rating, user_id) VALUES ($1, $2, $3) returning *;",
-      [req.body.movie_id, req.body.rating, req.body.user_id]
-    );
-    console.log(newRating);
-    res.status(201).json({
-      status: "success",
-      data: {
-        rating: newRating.row[0],
-      },
-    });
-  } catch (err) {
-    console.log(err);
-  }
+
+app.post("/ratings", async (req, res) => {
+    try {
+        const newRating = await db.any(
+            "INSERT INTO ratings (movie_id, rating, user_id) VALUES ($1, $2, $3) returning *;",
+            [req.body.movie_id, req.body.rating, req.body.user_id]
+        );
+        console.log(newRating);
+        res.status(201).json({
+            status: "success",
+            data: {
+                rating: newRating,
+            },
+        });
+    } catch (err) {
+        console.log(err);
+    }
+
+
 });
 
+// APIs for updateRatingBlock() and OTTER FUNCTION
+
+
+
+// THIS (BELOW) SHOULD BE THE LAST THING IN CODE
 app.use("*", notFoundRouter);
 
 app.listen(PORT, () => {
   console.log(`server is listening on localhost${PORT}`);
 });
+
