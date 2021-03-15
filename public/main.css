@@ -10,7 +10,7 @@
 
 footer {
   display: flex;
-  position: fixed;
+  /* position: fixed; */
   width: 100%;
   font-weight: 400;
   background-color: lightgray;
