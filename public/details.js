@@ -78,6 +78,7 @@ async function getData() {
 }
 
 async function postData() {
+
   try {
     await $.post("/checkdb");
   } catch (e) {
