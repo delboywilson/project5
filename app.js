@@ -90,15 +90,27 @@ app.get("/sumdb", async (req, res) => {
   res.send(sum);
 });
 
-let movie_id = 104;
+//post ratings to database
+/*let movie_id = 104;
 let rating = 5;
-let user_id = 1;
+let user_id = 1;*/
 
 app.post("/checkdb", async (req, res) => {
-  await db.any(
-    "INSERT INTO ratings (movie_id, rating, user_id) VALUES ($1, $2, $3)",
-    [movie_id, rating, user_id]
-  );
+  try {
+    const newRating = await db.any(
+      "INSERT INTO ratings (movie_id, rating, user_id) VALUES ($1, $2, $3) returning *;",
+      [req.body.movie_id, req.body.rating, req.body.user_id]
+    );
+    console.log(newRating);
+    res.status(201).json({
+      status: "success",
+      data: {
+        rating: newRating.row[0],
+      },
+    });
+  } catch (err) {
+    console.log(err);
+  }
 });
 
 app.use("*", notFoundRouter);
