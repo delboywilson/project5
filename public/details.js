@@ -87,8 +87,58 @@ async function postData() {
   }
 }
 
+// logic for rendering ratings block below
+
+async function updateRatingBlock() {
+
+  // hardcoded toggles
+  // to replace with await $.getJSON that asks our internal APIs (things in server I will FUCKING WRITE)
+
+  // let loggedIn = true
+  // let loggedIn = false
+  // let alreadyRated = true
+  // let alreadyRated = false
+
+  // hide everything
+  // check if logged in
+  // if no then (show log in)
+  // // else check if rated already
+  // // if no then (show rate field and button)
+  // // // on click call for OTTER function (that INSERTS, hides, shows, see scheme)
+  // // else (show you've rated)
+
+}
+
+// OTTER function {
+// // INSERTS, hides, shows, see scheme
+//}
+
+
+
+
+// let userID = 1;
+
+// document.getElementById("rate-btn").onclick = function () {
+//   if (userID)
+//     pool.query(
+//       `INSERT INTO users (movie_id, rating, user_id)
+// VALUES ($1, $2, $3)`,
+//       [movieID, rating, userID],
+//       (err, results) => {
+//         if (err) {
+//           throw err;
+//         }
+//         console.log(movieID, rating, userID);
+//         req.flash("success_msg", "Movie Rated!");
+//         res.redirect("/login");
+//       }
+//     );
+// };
+
 // need to add check if user is logged in, else prevent rating and encourage login/signup (maybe just alert - "you need to be logged in to do that"?)
 getMovie();
 // getData();
 // postData();
 averageRating();
+// updateRatingBlock();
+

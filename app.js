@@ -118,8 +118,14 @@ app.post("/ratings", async (req, res) => {
     }
 });
 
+// APIs for updateRatingBlock() and OTTER FUNCTION
+
+
+
+// THIS (BELOW) SHOULD BE THE LAST THING IN CODE
 app.use("*", notFoundRouter);
 
 app.listen(PORT, () => {
   console.log(`server is listening on localhost${PORT}`);
 });
+
