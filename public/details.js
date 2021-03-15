@@ -35,16 +35,28 @@ async function sumData() {
   const ratings = [];
   try {
     let sum = await $.getJSON("/sumdb");
-    console.log(sum);
+    // console.log(sum);
     ratings.push(sum);
+    console.log(ratings);
+
+    function extractValue(arr, prop) {
+      let extractedValue = [];
+
+      for (let i = 0; i < arr.length; ++i) {
+        // extract value from property
+        extractedValue.push(arr[i][prop]);
+      }
+      return extractedValue;
+    }
+    // passing an array of objects and property 'rating' to extract
+    const result = extractValue(ratings, "rating");
+    console.log(result);
   } catch (e) {
     console.log(e);
   }
-  console.log(ratings);
+
   // let result = ratings.map((a) => a.rating);
   // let result = ratings.map(({ rating }) => rating);
-  const result = extractValue(ratings, "a");
-  console.log(result);
   // hardcoded
   // initial Ratings need to actually come from db
   // should get all ratings for that movie and do Math to provide a current average rating
