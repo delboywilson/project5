@@ -85,6 +85,11 @@ app.get("/checkdb", async (req, res) => {
   res.send(results);
 });
 
+app.get("/sumdb", async (req, res) => {
+  let sum = await db.any("SELECT rating FROM ratings;");
+  res.send(sum);
+});
+
 let movie_id = 104;
 let rating = 5;
 let user_id = 1;
