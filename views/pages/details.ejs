@@ -1,21 +1,14 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
-    <a class="navbar-brand" href="/home">RateForFriends</a>
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarNav"
-      aria-controls="navbarNav"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
+    <a class="navbar-brand" href="#">RateForFriends</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/home">Home</a>
+          <a class="nav-link active" aria-current="page" href="#">Home</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/login">Log in</a>
@@ -23,23 +16,25 @@
         <li class="nav-item">
           <a class="nav-link" href="/signup">Sign up</a>
         </li>
-        <li class="nav-item">
-          <form action="/logout?_method=DELETE" method="POST">
-            <button class="btn btn-default nav-link" type="submit">
-              Log out
-            </button>
-          </form>
-        </li>
+        <form action="/logout?_method=DELETE" method="POST">
+          <button type="submit">Log out</button>
+        </form>
       </ul>
     </div>
   </div>
 </nav>
+
 <div class="container-fluid">
+
+  <!--
   <div class="container-fluid">
     <h3>Please rate your movie:</h3>
   </div>
+-->
 
-  <div class="container">
+  <!-- COMMON PART -->
+
+  <div class="container mt-4">
     <div class="well" id="movie">
       <div class="row">
         <div class="col-md-6">
@@ -47,7 +42,9 @@
         </div>
         <div class="col-md-4">
           <ul class="list-group">
-            <li class="list-group-item"><h2 class="movie-title">Title</h2></li>
+            <li class="list-group-item">
+              <h2 class="movie-title">Title</h2>
+            </li>
             <li class="list-group-item">
               <strong>Genre:</strong>
               <div class="genre">Genre</div>
@@ -82,29 +79,47 @@
               </tbody>
             </table>
           </div>
-          <div class="form-group">
-            <input
-              type="number"
-              id="rating-control"
-              class="form-control"
-              step="0.1"
-              max="5"
-              min="1"
-              placeholder="Rate 1 - 5"
-            />
-            <button
-              class="btn btn-primary"
-              id="rate-btn"
-              type="submit"
-              value="Submit"
-            >
+
+          <!-- PART WITH THREE STATES STARTS -->
+
+          <!-- STATE 1 - IF NOT LOGGED IN -->
+
+          <div class="state-not-logged">
+            <button class="btn btn-outline-secondary" id="rate-btn" type="submit" value="Submit">
+              Login to rate the movie
+            </button>
+          </div>
+
+          <!-- STATE 1 - END -->
+
+          <!-- STATE 2 - IF LOGGED IN AND NOT RATED THIS YET -->
+
+          <div class="state-logged-in-not-rated input-group">
+            <input type="number" id="rating-control" class="form-control" step="0.1" max="5" min="1"
+              placeholder="Rate 1 - 5" />
+            <button class="btn btn-outline-secondary" id="rate-btn" type="submit" value="Submit">
               Rate
             </button>
-            <hr />
           </div>
-          <a href="/home" class="btn btn-default" onclick="history.back(-1)"
-            >Search and rate another!</a
-          >
+
+          <!-- STATE 2 - END -->
+
+          <!-- STATE 3 - IF LOGGED IN AND ALREADY RATED THIS -->
+
+          <div class="state-logged-and-rated">
+            <div>
+              You've rated the movie!<br>
+              Stars given: <span>[variable]</span>
+            </div>
+          </div>
+
+          <!-- STATE 3 - END -->
+
+          <!-- END OF PART WITH THREE STATES -->
+
+          <hr />
+
+          <a href="/home" class="btn btn-outline-secondary" onclick="history.back(-1)">Search and rate another!</a>
         </div>
       </div>
     </div>
