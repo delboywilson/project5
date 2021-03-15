@@ -80,7 +80,7 @@ app.use("/confirm", confirmRouter);
 app.use("/error", errorRouter);
 app.use("/logout", logoutRouter);
 
-app.get("/checkdb", async (req, res) => {
+app.get("/ratings", async (req, res) => {
   let results = await db.any("SELECT * FROM ratings;");
   res.send(results);
 });
@@ -90,7 +90,7 @@ app.get("/checkdb", async (req, res) => {
 let rating = 5;
 let user_id = 1;*/
 
-app.post("/checkdb", async (req, res) => {
+app.post("/ratings", async (req, res) => {
     try {
         const newRating = await db.any(
             "INSERT INTO ratings (movie_id, rating, user_id) VALUES ($1, $2, $3) returning *;",
@@ -100,7 +100,7 @@ app.post("/checkdb", async (req, res) => {
         res.status(201).json({
             status: "success",
             data: {
-                rating: newRating.row[0],
+                rating: newRating,
             },
         });
     } catch (err) {
