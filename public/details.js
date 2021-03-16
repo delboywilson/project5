@@ -92,17 +92,17 @@ async function postData() {
 
 async function updateRatingBlock() {
   // hardcoded toggles
-  // to replace with await $.getJSON that asks our internal APIs (things in server I will FUCKING WRITE)
+  // to replace with await $.getJSON that asks our internal APIs
+  
   // let loggedIn = true
   //let loggedIn = false;
    let alreadyRated = true
   // let alreadyRated = false
   // hide everything
 
-    
-    let user = await $.getJSON("/userinfo");   
-    let loggedIn = user;
-    console.log(user);
+  let user = await $.getJSON("/userinfo");   
+  let loggedIn = user;
+  console.log(user);
   let notLoggedInBlock = $(".state-not-logged");
   let loggedInNotRated = $(".state-logged-in-not-rated");
   let loggedInAndRated = $(".state-logged-and-rated");
@@ -110,13 +110,6 @@ async function updateRatingBlock() {
   notLoggedInBlock.hide();
   loggedInNotRated.hide();
   loggedInAndRated.hide();
-
-  // check if logged in
-  // if no then (show log in)
-  // // else check if rated already
-  // // if no then (show rate field and button)
-
-  // // else (show you've rated)
 
   if (!loggedIn) {
     notLoggedInBlock.show();
