@@ -86,42 +86,38 @@ app.get("/ratings", async (req, res) => {
 });
 
 app.get("/averageRating", async (req, res) => {
-  let average = await db.any(
-    "SELECT AVG(rating)::numeric(10,1) from ratings WHERE movie_id = $1;",
-    [req.body.movie_id]
-  );
-  console.log(req.body.movie_id).then((average) => {
-    let aveValue = average[0].avg;
-    res.send(aveValue);
-  });
+  let average = await db
+    .any(
+      "SELECT AVG(rating)::numeric(10,1) from ratings WHERE movie_id = $1;",
+      [104]
+    )
+    .then((average) => {
+      let aveValue = average[0].avg;
+      res.send(aveValue);
+    });
 });
 
 //post ratings to database
 
-
 app.post("/ratings", async (req, res) => {
-    try {
-        const newRating = await db.any(
-            "INSERT INTO ratings (movie_id, rating, user_id) VALUES ($1, $2, $3) returning *;",
-            [req.body.movie_id, req.body.rating, req.body.user_id]
-        );
-        console.log(newRating);
-        res.status(201).json({
-            status: "success",
-            data: {
-                rating: newRating,
-            },
-        });
-    } catch (err) {
-        console.log(err);
-    }
-
-
+  try {
+    const newRating = await db.any(
+      "INSERT INTO ratings (movie_id, rating, user_id) VALUES ($1, $2, $3) returning *;",
+      [req.body.movie_id, req.body.rating, req.body.user_id]
+    );
+    console.log(newRating);
+    res.status(201).json({
+      status: "success",
+      data: {
+        rating: newRating,
+      },
+    });
+  } catch (err) {
+    console.log(err);
+  }
 });
 
 // APIs for updateRatingBlock() and OTTER FUNCTION
-
-
 
 // THIS (BELOW) SHOULD BE THE LAST THING IN CODE
 app.use("*", notFoundRouter);
@@ -129,4 +125,3 @@ app.use("*", notFoundRouter);
 app.listen(PORT, () => {
   console.log(`server is listening on localhost${PORT}`);
 });
-

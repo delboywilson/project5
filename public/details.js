@@ -2,9 +2,6 @@ async function getMovie() {
   // get movie ID from url
   let pathname = window.location.pathname;
   let pathname_components = pathname.split("/");
-
-  console.log(pathname_components);
-
   let pathname_components_length = pathname_components.length;
   let pathname_components_last_index = pathname_components_length - 1;
   let movieId = pathname_components[pathname_components_last_index];
@@ -18,57 +15,55 @@ async function getMovie() {
   // get each detail, send to ejs
   let img = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
   $(".movie-poster").attr("src", img);
-
   $(".movie-title").html(movie.title);
-
   let genre = movie.genres[0].name;
   $(".genre").html(genre);
-
   $(".release-date").html(movie.release_date);
-
   $(".overview").html(movie.overview);
 }
 
 async function averageRating() {
   try {
     let average = await $.getJSON("/averageRating");
-    const ratings = average;
-
-    console.log(ratings);
-    // Total Stars
-    const starsTotal = 5;
-
-    // Run getRatings when DOM loads
-    document.addEventListener("DOMContentLoaded", getRatings);
-
-    // Form Element
-    const ratingControl = document.getElementById("rating-control");
-
-    // Get ratings
-    function getRatings() {
-      for (let rating in ratings) {
-        // Get percentage
-        const starPercentage = (ratings[rating] / starsTotal) * 100;
-
-        // Round to nearest 10
-        const starPercentageRounded = `${
-          Math.round(starPercentage / 10) * 10
-        }%`;
-
-        // Set width of stars-inner to percentage
-        document.querySelector(
-          `.${rating} .stars-inner`
-        ).style.width = starPercentageRounded;
-
-        // Add number rating
-        document.querySelector(`.${rating} .number-rating`).innerHTML =
-          ratings[rating];
-      }
-    }
+    console.log(average);
   } catch (e) {
     console.log(e);
   }
 }
+
+const ratings = {
+  initial_rating: 3.6,
+};
+
+// Total Stars
+const starsTotal = 5;
+
+// Run getRatings when DOM loads
+document.addEventListener("DOMContentLoaded", getRatings);
+
+// Form Element
+const ratingControl = document.getElementById("rating-control");
+
+// Get ratings
+function getRatings() {
+  for (let rating in ratings) {
+    // Get percentage
+    const starPercentage = (ratings[rating] / starsTotal) * 100;
+
+    // Round to nearest 10
+    const starPercentageRounded = `${Math.round(starPercentage / 10) * 10}%`;
+
+    // Set width of stars-inner to percentage
+    document.querySelector(
+      `.${rating} .stars-inner`
+    ).style.width = starPercentageRounded;
+
+    // Add number rating
+    document.querySelector(`.${rating} .number-rating`).innerHTML =
+      ratings[rating];
+  }
+}
+
 // need to add function that pushes to rating to the db, then recalls the function to show the updated rating for the movie
 async function getData() {
   try {
@@ -90,15 +85,12 @@ async function postData() {
 // logic for rendering ratings block below
 
 async function updateRatingBlock() {
-
   // hardcoded toggles
   // to replace with await $.getJSON that asks our internal APIs (things in server I will FUCKING WRITE)
-
   // let loggedIn = true
   // let loggedIn = false
   // let alreadyRated = true
   // let alreadyRated = false
-
   // hide everything
   // check if logged in
   // if no then (show log in)
@@ -106,15 +98,11 @@ async function updateRatingBlock() {
   // // if no then (show rate field and button)
   // // // on click call for OTTER function (that INSERTS, hides, shows, see scheme)
   // // else (show you've rated)
-
 }
 
 // OTTER function {
 // // INSERTS, hides, shows, see scheme
 //}
-
-
-
 
 // let userID = 1;
 
@@ -141,4 +129,3 @@ getMovie();
 // postData();
 averageRating();
 // updateRatingBlock();
-
