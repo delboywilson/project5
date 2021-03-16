@@ -17,6 +17,7 @@ const flash = require("express-flash");
 const initializePassport = require("./passport-config");
 const passport = require("passport");
 const methodOverride = require("method-override");
+const { checkAuthenticated, checkNotAuthenticated } = require("./middleware");
 
 //function to find a user based on the email
 initializePassport(passport);
@@ -24,7 +25,8 @@ initializePassport(passport);
 //to store users whithout the database
 const PORT = process.env.PORT || 3003;
 
-app.set("view engine", "ejs");
+
+app.set('view engine', 'ejs');
 
 app.use(morgan("dev"));
 app.use("/static", express.static(path.join(__dirname, "public")));
@@ -55,6 +57,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(methodOverride("_method"));
 
+
 // routes
 
 const indexRouter = require("./routes/index");
@@ -80,27 +83,30 @@ app.use("/confirm", confirmRouter);
 app.use("/error", errorRouter);
 app.use("/logout", logoutRouter);
 
+
+
 app.get("/ratings", async (req, res) => {
   let results = await db.any("SELECT * FROM ratings;");
   res.send(results);
 });
 
-app.get("/averageRating", async (req, res) => {
-  let average = await db
-    .any("SELECT AVG(rating)::numeric(10,1) from ratings WHERE movie_id = 104;")
-    .then((average) => {
-      let aveValue = average[0].avg;
-      res.send(aveValue);
-    });
+app.get("/averageRating/:movieID", async (req, res) => {
+  let average = await db.any(
+    "SELECT AVG(rating)::numeric(10,1) from ratings WHERE movie_id = $1;",
+    [req.params.movieID]
+  );
+  let aveValue = average[0].avg;
+  res.send(aveValue);
 });
 
 //post ratings to database
 
 app.post("/ratings", async (req, res) => {
+
     try {
         const newRating = await db.any(
             "INSERT INTO ratings (movie_id, rating, user_id) VALUES ($1, $2, $3) returning *;",
-            [req.body.movie_id, req.body.rating, req.body.user_id]
+            [req.body.movie_id, req.body.rating, req.body.user_id],
         );
         console.log(newRating);
         res.status(201).json({
@@ -116,12 +122,9 @@ app.post("/ratings", async (req, res) => {
 
 // APIs for updateRatingBlock() and rateAndChangeState()
 
-
-
 // THIS (BELOW) SHOULD BE THE LAST THING IN CODE
 app.use("*", notFoundRouter);
 
 app.listen(PORT, () => {
   console.log(`server is listening on localhost${PORT}`);
 });
-
