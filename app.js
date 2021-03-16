@@ -83,7 +83,10 @@ app.use("/confirm", confirmRouter);
 app.use("/error", errorRouter);
 app.use("/logout", logoutRouter);
 
-
+app.get("/userinfo", async (req, res) => {
+    
+    res.json(req.user || false); //result in req success on frontend
+});
 
 app.get("/ratings", async (req, res) => {
   let results = await db.any("SELECT * FROM ratings;");
