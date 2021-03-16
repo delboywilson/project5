@@ -81,7 +81,7 @@ rateButton.on("click",
 
 async function postData() {
     try {
-        await $.post("/ratings");
+        await $.post("/ratings", user); //pass userid and rating, second argument it will include the seconf arg to pass
         console.log("it works");
   } catch (e) {
     console.log(e);
