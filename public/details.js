@@ -88,16 +88,39 @@ async function updateRatingBlock() {
   // hardcoded toggles
   // to replace with await $.getJSON that asks our internal APIs (things in server I will FUCKING WRITE)
   // let loggedIn = true
-  // let loggedIn = false
+  let loggedIn = false
   // let alreadyRated = true
   // let alreadyRated = false
   // hide everything
+
+  let notLoggedInBlock = $(".state-not-logged")
+  let loggedInNotRated = $(".state-logged-in-not-rated")
+  let loggedInAndRated = $(".state-logged-and-rated")
+
+  notLoggedInBlock.hide()
+  loggedInNotRated.hide()
+  loggedInAndRated.hide()
+
   // check if logged in
   // if no then (show log in)
   // // else check if rated already
   // // if no then (show rate field and button)
-  // // // on click call for OTTER function (that INSERTS, hides, shows, see scheme)
+
   // // else (show you've rated)
+<<<<<<< HEAD
+=======
+
+  if(!loggedIn) {
+    notLoggedInBlock.show()
+  } else {
+    if(!alreadyRated) {
+      loggedInNotRated.show()
+      // // // on click call for OTHER function (that INSERTS, hides, shows, see scheme)
+    } else {
+      loggedInAndRated.show()
+    }
+  }
+>>>>>>> 431af643296a37b70c43b788b95dca6fe2b64e9d
 }
 
 // OTTER function {
@@ -128,4 +151,9 @@ getMovie();
 // getData();
 // postData();
 averageRating();
+<<<<<<< HEAD
 // updateRatingBlock();
+=======
+updateRatingBlock();
+
+>>>>>>> 431af643296a37b70c43b788b95dca6fe2b64e9d
