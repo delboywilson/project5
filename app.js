@@ -85,12 +85,36 @@ app.use("/logout", logoutRouter);
 
 app.get("/userinfo", async (req, res) => {
     
-    res.json(req.user || false); //result in req success on frontend
+    res.json(req.user || false); // will pass to frontend either userId or false
 });
 
 app.get("/ratings", async (req, res) => {
   let results = await db.any("SELECT * FROM ratings;");
   res.send(results);
+});
+
+app.get("/currentUserRating/:movieID", async (req, res) => {
+  if(req.user) {
+    let currentUserRatings = await db.any(
+      "SELECT rating FROM ratings WHERE user_id = $1 AND movie_id = $2;",
+      [req.user.id, req.params.movieID]
+    );
+    if (currentUserRatings.length !== 0){
+      let firstRating = currentUserRatings[0].rating
+      res.json(firstRating)
+    } else {
+      res.json(false)
+    }
+  } else {
+    res.json(null)
+  }
+
+  // let average = await db.any(
+  //   "SELECT AVG(rating)::numeric(10,1) from ratings WHERE movie_id = $1;",
+  //   [req.params.movieID]
+  // );
+  // let aveValue = average[0].avg;
+  // res.send(aveValue);
 });
 
 app.get("/averageRating/:movieID", async (req, res) => {
@@ -109,7 +133,7 @@ app.post("/ratings", async (req, res) => {
     try {
         const newRating = await db.any(
             "INSERT INTO ratings (movie_id, rating, user_id) VALUES ($1, $2, $3) returning *;",
-            [req.body.movie_id, req.body.rating, req.body.user_id],
+            [req.body.movie_id, req.body.rating, req.user.id],
         );
         console.log(newRating);
         res.status(201).json({
