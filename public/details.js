@@ -77,53 +77,51 @@ let notLoggedInBlock = $(".state-not-logged");
 let loggedInNotRated = $(".state-logged-in-not-rated");
 let loggedInAndRated = $(".state-logged-and-rated");
 
-function showUserRating(rating){
-  let userRatingSpan = loggedInAndRated.find(".user-rating-span")
-  userRatingSpan.html(rating)
-  loggedInAndRated.show()
+function showUserRating(rating) {
+  let userRatingSpan = loggedInAndRated.find(".user-rating-span");
+  userRatingSpan.html(rating);
+  loggedInAndRated.show();
 }
 
 async function updateRatingBlock() {
-  
   notLoggedInBlock.hide();
   loggedInNotRated.hide();
   loggedInAndRated.hide();
 
-  let user = await $.getJSON("/userinfo");   
+  let user = await $.getJSON("/userinfo");
   let loggedIn = user;
-  
+
   if (!loggedIn) {
     notLoggedInBlock.show();
   } else {
-    let movieId = getMovieId()
-    let userMovieRating = await $.getJSON("/currentUserRating/" + movieId)
-    let alreadyRated = userMovieRating
-  
+    let movieId = getMovieId();
+    let userMovieRating = await $.getJSON("/currentUserRating/" + movieId);
+    let alreadyRated = userMovieRating;
+
     if (!alreadyRated) {
       loggedInNotRated.show();
     } else {
-      showUserRating(userMovieRating)
+      showUserRating(userMovieRating);
     }
   }
 }
 
-let rateButton = $("#rate-btn")
-rateButton.on("click",
-    (event) => {
-        event.preventDefault()
-        console.log("working")
-        postData()
-    })
+let rateButton = $("#rate-btn");
+rateButton.on("click", (event) => {
+  event.preventDefault();
+  console.log("working");
+  postData();
+});
 
 async function postData() {
-    try {
-      let movieId = getMovieId();
-      let ratingFieldValue = $("#rating-control").val()
-        await $.post("/ratings", {movie_id: movieId, rating: ratingFieldValue});
-        loggedInNotRated.hide();
-        showUserRating(ratingFieldValue);
-        // loggedInAndRated.hide();
-        console.log("it works");
+  try {
+    let movieId = getMovieId();
+    let ratingFieldValue = $("#rating-control").val();
+    await $.post("/ratings", { movie_id: movieId, rating: ratingFieldValue });
+    loggedInNotRated.hide();
+    showUserRating(ratingFieldValue);
+    // loggedInAndRated.hide();
+    console.log("it works");
   } catch (e) {
     console.log(e);
   }
