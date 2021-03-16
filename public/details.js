@@ -63,12 +63,12 @@ function displayRating(rating, ratingSelector) {
 
 // need to add function that pushes to rating to the db, then recalls the function to show the updated rating for the movie
 async function getData() {
-  try {
-    let data = await $.getJSON("/ratings");
-    console.log(data);
-  } catch (e) {
-    console.log(e);
-  }
+    try {
+        let data = await $.getJSON("/ratings");
+        console.log(data);
+    } catch (e) {
+        console.log(e);
+    }
 }
 
 let rateButton = $("#rate-btn")
@@ -79,13 +79,14 @@ rateButton.on("click",
         postData()
     })
 
+let userId = $.getJSON("/userinfo"); 
 async function postData() {
     try {
-        await $.post("/ratings", user); //pass userid and rating, second argument it will include the seconf arg to pass
+        await $.post("/ratings", userId); //pass userid and rating, second argument it will include the seconf arg to pass
         console.log("it works");
-  } catch (e) {
-    console.log(e);
-  }
+    } catch (e) {
+        console.log("something should be here");
+    }
 }
 
 // logic for rendering ratings block below
@@ -96,8 +97,8 @@ async function updateRatingBlock() {
   
   // let loggedIn = true
   //let loggedIn = false;
-   let alreadyRated = true
-  // let alreadyRated = false
+  // let alreadyRated = true
+   let alreadyRated = false
   // hide everything
 
   let user = await $.getJSON("/userinfo");   
@@ -122,6 +123,7 @@ async function updateRatingBlock() {
     }
   }
 }
+
 
 async function rateAndChangeState() {
 
