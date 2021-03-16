@@ -119,16 +119,19 @@ async function updateRatingBlock() {
   } else {
     if (!alreadyRated) {
       loggedInNotRated.show();
-      // // // on click call for OTHER function (that INSERTS, hides, shows, see scheme)
+      // // // on click call function rateAndChangeState()
     } else {
       loggedInAndRated.show();
     }
   }
 }
 
-// OTTER function {
+async function rateAndChangeState() {
+
 // // INSERTS, hides, shows, see scheme
-//}
+
+}
+
 
 // let userID = 1;
 

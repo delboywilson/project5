@@ -120,7 +120,7 @@ app.post("/ratings", async (req, res) => {
     }
 });
 
-// APIs for updateRatingBlock() and OTTER FUNCTION
+// APIs for updateRatingBlock() and rateAndChangeState()
 
 // THIS (BELOW) SHOULD BE THE LAST THING IN CODE
 app.use("*", notFoundRouter);
