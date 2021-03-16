@@ -1,8 +1,15 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">RateForFriends</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNav"
+      aria-controls="navbarNav"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
@@ -25,7 +32,6 @@
 </nav>
 
 <div class="container-fluid">
-
   <!--
   <div class="container-fluid">
     <h3>Please rate your movie:</h3>
@@ -85,7 +91,12 @@
           <!-- STATE 1 - IF NOT LOGGED IN -->
 
           <div class="state-not-logged">
-            <button class="btn btn-outline-secondary" id="login-to-rate-btn" type="submit" value="Submit">
+            <button
+              class="btn btn-outline-secondary"
+              id="login-to-rate-btn"
+              type="submit"
+              value="Submit"
+            >
               Login to rate the movie
             </button>
           </div>
@@ -95,10 +106,21 @@
           <!-- STATE 2 - IF LOGGED IN AND NOT RATED THIS YET -->
 
           <div class="state-logged-in-not-rated input-group">
-            <input type="number" id="rating-control" class="form-control" step="0.1" max="5" min="1"
-              placeholder="Rate 1 - 5" />
-			  <!--<button class="btn btn-outline-success" id="search-button" type="submit">-->
-            <button class="btn btn-outline-secondary" id="rate-btn" type="submit">
+            <input
+              type="number"
+              id="rating-control"
+              class="form-control"
+              step="0.1"
+              max="5"
+              min="1"
+              placeholder="Rate 1 - 5"
+            />
+            <!--<button class="btn btn-outline-success" id="search-button" type="submit">-->
+            <button
+              class="btn btn-outline-secondary"
+              id="rate-btn"
+              type="submit"
+            >
               Rate
             </button>
           </div>
@@ -109,7 +131,7 @@
 
           <div class="state-logged-and-rated">
             <div>
-              You've rated the movie!<br>
+              You've rated the movie!<br />
               Stars given: <span>[variable]</span>
             </div>
           </div>
@@ -120,7 +142,12 @@
 
           <hr />
 
-          <a href="/home" class="btn btn-outline-secondary" onclick="history.back(-1)">Search and rate another!</a>
+          <a
+            href="/home"
+            class="btn btn-outline-secondary"
+            onclick="history.back(-1)"
+            >Search and rate another!</a
+          >
         </div>
       </div>
     </div>
