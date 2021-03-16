@@ -71,9 +71,18 @@ async function getData() {
   }
 }
 
+let rateButton = $("#rate-btn")
+rateButton.on("click",
+    (event) => {
+        event.preventDefault()
+        console.log("working")
+        postData()
+    })
+
 async function postData() {
-  try {
-    await $.post("/ratings");
+    try {
+        await $.post("/ratings");
+        console.log("it works");
   } catch (e) {
     console.log(e);
   }
@@ -142,7 +151,7 @@ async function updateRatingBlock() {
 
 // need to add check if user is logged in, else prevent rating and encourage login/signup (maybe just alert - "you need to be logged in to do that"?)
 getMovie();
-// getData();
-// postData();
+//getData();
+postData();
 averageRating();
 updateRatingBlock();
