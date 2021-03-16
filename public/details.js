@@ -94,11 +94,15 @@ async function updateRatingBlock() {
   // hardcoded toggles
   // to replace with await $.getJSON that asks our internal APIs (things in server I will FUCKING WRITE)
   // let loggedIn = true
-  let loggedIn = false;
-  // let alreadyRated = true
+  //let loggedIn = false;
+   let alreadyRated = true
   // let alreadyRated = false
   // hide everything
 
+    
+    let user = await $.getJSON("/userinfo");   
+    let loggedIn = user;
+    console.log(user);
   let notLoggedInBlock = $(".state-not-logged");
   let loggedInNotRated = $(".state-logged-in-not-rated");
   let loggedInAndRated = $(".state-logged-and-rated");
