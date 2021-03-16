@@ -96,7 +96,6 @@ app.get("/averageRating", async (req, res) => {
 
 //post ratings to database
 
-
 app.post("/ratings", async (req, res) => {
     try {
         const newRating = await db.any(
@@ -113,11 +112,9 @@ app.post("/ratings", async (req, res) => {
     } catch (err) {
         console.log(err);
     }
-
-
 });
 
-// APIs for updateRatingBlock() and OTTER FUNCTION
+// APIs for updateRatingBlock() and rateAndChangeState()
 
 
 
