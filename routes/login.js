@@ -7,6 +7,7 @@ const initializePassport = require("../passport-config");
 const db = require("../database");
 
 router.get("/", (req, res) => {
+    console.log(req.user);
   res.render("pages/login");
 });
 
