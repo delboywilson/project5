@@ -85,16 +85,13 @@ app.get("/ratings", async (req, res) => {
   res.send(results);
 });
 
-app.get("/averageRating", async (req, res) => {
-  let average = await db
-    .any(
-      "SELECT AVG(rating)::numeric(10,1) from ratings WHERE movie_id = $1;",
-      [104]
-    )
-    .then((average) => {
-      let aveValue = average[0].avg;
-      res.send(aveValue);
-    });
+app.get("/averageRating/:movieID", async (req, res) => {
+  let average = await db.any(
+    "SELECT AVG(rating)::numeric(10,1) from ratings WHERE movie_id = $1;",
+    [req.params.movieID]
+  );
+  let aveValue = average[0].avg;
+  res.send(aveValue);
 });
 
 //post ratings to database
