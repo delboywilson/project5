@@ -174,6 +174,7 @@ searchButton.on("click",
     (event) => {
         event.preventDefault()
         clickSearchGetResults()
+        console.log("yay")
     })
 
 // same thing NOT with jQuery:
