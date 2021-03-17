@@ -77,11 +77,13 @@ let notLoggedInBlock = $(".state-not-logged");
 let loggedInNotRated = $(".state-logged-in-not-rated");
 let loggedInAndRated = $(".state-logged-and-rated");
 
+
 function showUserRating(rating) {
   let userRatingSpan = loggedInAndRated.find(".user-rating-span");
   userRatingSpan.html(rating);
   loggedInAndRated.show();
 }
+
 
 async function updateRatingBlock() {
   notLoggedInBlock.hide();
@@ -106,12 +108,14 @@ async function updateRatingBlock() {
   }
 }
 
+
 let rateButton = $("#rate-btn");
 rateButton.on("click", (event) => {
   event.preventDefault();
   console.log("working");
   postData();
 });
+
 
 async function postData() {
   try {
@@ -126,6 +130,7 @@ async function postData() {
     console.log(e);
   }
 }
+
 
 // need to add check if user is logged in, else prevent rating and encourage login/signup (maybe just alert - "you need to be logged in to do that"?)
 getMovie();
