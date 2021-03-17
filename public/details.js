@@ -71,6 +71,46 @@ async function getData() {
     }
 }
 
+// logic for rendering ratings block below
+
+
+let notLoggedInBlock = $(".state-not-logged");
+let loggedInNotRated = $(".state-logged-in-not-rated");
+let loggedInAndRated = $(".state-logged-and-rated");
+
+
+function showUserRating(rating){
+  let userRatingSpan = loggedInAndRated.find(".user-rating-span")
+  userRatingSpan.html(rating)
+  loggedInAndRated.show()
+}
+
+async function updateRatingBlock() {
+  
+
+  notLoggedInBlock.hide();
+  loggedInNotRated.hide();
+  loggedInAndRated.hide();
+
+  let user = await $.getJSON("/userinfo");   
+  let loggedIn = user;
+  
+  if (!loggedIn) {
+    notLoggedInBlock.show();
+  } else {
+    let movieId = getMovieId()
+    let userMovieRating = await $.getJSON("/currentUserRating/" + movieId)
+    let alreadyRated = userMovieRating
+  
+    if (!alreadyRated) {
+      loggedInNotRated.show();
+    } else {
+      showUserRating(userMovieRating)
+    }
+  }
+}
+
+
 let rateButton = $("#rate-btn")
 rateButton.on("click",
     (event) => {
@@ -79,77 +119,20 @@ rateButton.on("click",
         postData()
     })
 
-let userId = $.getJSON("/userinfo"); 
+
 async function postData() {
     try {
-        await $.post("/ratings", userId); //pass userid and rating, second argument it will include the seconf arg to pass
+      let movieId = getMovieId();
+      let ratingFieldValue = $("#rating-control").val()
+        await $.post("/ratings", {movie_id: movieId, rating: ratingFieldValue});
+        loggedInNotRated.hide();
+        showUserRating(ratingFieldValue);
+        // loggedInAndRated.hide();
         console.log("it works");
-    } catch (e) {
-        console.log("something should be here");
-    }
-}
-
-// logic for rendering ratings block below
-
-async function updateRatingBlock() {
-  // hardcoded toggles
-  // to replace with await $.getJSON that asks our internal APIs
-  
-  // let loggedIn = true
-  //let loggedIn = false;
-  // let alreadyRated = true
-   let alreadyRated = false
-  // hide everything
-
-  let user = await $.getJSON("/userinfo");   
-  let loggedIn = user;
-  console.log(user);
-  let notLoggedInBlock = $(".state-not-logged");
-  let loggedInNotRated = $(".state-logged-in-not-rated");
-  let loggedInAndRated = $(".state-logged-and-rated");
-
-  notLoggedInBlock.hide();
-  loggedInNotRated.hide();
-  loggedInAndRated.hide();
-
-  if (!loggedIn) {
-    notLoggedInBlock.show();
-  } else {
-    if (!alreadyRated) {
-      loggedInNotRated.show();
-      // // // on click call function rateAndChangeState()
-    } else {
-      loggedInAndRated.show();
-    }
+  } catch (e) {
+    console.log(e);
   }
 }
-
-
-async function rateAndChangeState() {
-
-// // INSERTS, hides, shows, see scheme
-
-}
-
-
-// let userID = 1;
-
-// document.getElementById("rate-btn").onclick = function () {
-//   if (userID)
-//     pool.query(
-//       `INSERT INTO users (movie_id, rating, user_id)
-// VALUES ($1, $2, $3)`,
-//       [movieID, rating, userID],
-//       (err, results) => {
-//         if (err) {
-//           throw err;
-//         }
-//         console.log(movieID, rating, userID);
-//         req.flash("success_msg", "Movie Rated!");
-//         res.redirect("/login");
-//       }
-//     );
-// };
 
 // need to add check if user is logged in, else prevent rating and encourage login/signup (maybe just alert - "you need to be logged in to do that"?)
 getMovie();

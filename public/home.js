@@ -70,11 +70,9 @@ async function getMoviedbJSON(api_method_path, new_options) {
 
 async function showMoviesWhenFiltersChange() {
     let filter_vals = []
-
     let filters = $(".all-filters select")
 
     // https://api.jquery.com/each/
-
     filters.each( function() {
         let filter_id = $(this).val()
         if (filter_id !== "") {
@@ -84,10 +82,10 @@ async function showMoviesWhenFiltersChange() {
     console.log(filter_vals)
 
     let discoverResponse = await getMoviedbJSON("discover/movie", {
-        sort_by: "popularity.desc"
+        sort_by: "popularity.desc",
+        with_genres: filter_vals.join(",")
     })
-
-
+    displayMoviesResponse(discoverResponse)
 }
 
 async function loadDiscoverFilters(){

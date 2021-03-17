@@ -38,7 +38,7 @@
     <div class="well" id="movie">
       <div class="row">
         <div class="col-md-6">
-          <img src="..." class="movie-poster" />
+          <img src="..." class="movie-poster w-100" />
         </div>
         <div class="col-md-4">
           <ul class="list-group">
@@ -97,7 +97,6 @@
           <div class="state-logged-in-not-rated input-group">
             <input type="number" id="rating-control" class="form-control" step="0.1" max="5" min="1"
               placeholder="Rate 1 - 5" />
-			  <!--<button class="btn btn-outline-success" id="search-button" type="submit">-->
             <button class="btn btn-outline-secondary" id="rate-btn" type="submit">
               Rate
             </button>
@@ -110,7 +109,7 @@
           <div class="state-logged-and-rated">
             <div>
               You've rated the movie!<br>
-              Stars given: <span>[variable]</span>
+              Stars given: <span class="user-rating-span">[variable]</span>
             </div>
           </div>
 
