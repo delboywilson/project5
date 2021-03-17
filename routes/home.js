@@ -6,7 +6,9 @@ const flash = require("express-flash");
 const initializePassport = require("../passport-config");
 
 router.get("/", (req, res) => {
-  res.render("pages/home");
+    res.render("pages/home", {
+        isAuthenticated: req.user != undefined
+    });
 });
 
 module.exports = router;

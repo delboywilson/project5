@@ -63,15 +63,6 @@ function displayRating(rating, ratingSelector) {
 
 // need to add function that pushes to rating to the db, then recalls the function to show the updated rating for the movie
 async function getData() {
-<<<<<<< HEAD
-    try {
-        let data = await $.getJSON("/ratings");
-        console.log(data);
-    } catch (e) {
-        console.log(e);
-    }
-}
-=======
   try {
     let data = await $.getJSON("/ratings");
     console.log(data);
@@ -85,18 +76,6 @@ async function getData() {
 let notLoggedInBlock = $(".state-not-logged");
 let loggedInNotRated = $(".state-logged-in-not-rated");
 let loggedInAndRated = $(".state-logged-and-rated");
->>>>>>> b16ca4290a88ff8240c2efdfd8cef235f3639d3d
-
-function showUserRating(rating){
-  let userRatingSpan = loggedInAndRated.find(".user-rating-span")
-  userRatingSpan.html(rating)
-  loggedInAndRated.show()
-}
-
-
-let notLoggedInBlock = $(".state-not-logged");
-let loggedInNotRated = $(".state-logged-in-not-rated");
-let loggedInAndRated = $(".state-logged-and-rated");
 
 
 function showUserRating(rating){
@@ -104,13 +83,10 @@ function showUserRating(rating){
   userRatingSpan.html(rating)
   loggedInAndRated.show()
 }
+
 
 async function updateRatingBlock() {
   
-<<<<<<< HEAD
-
-=======
->>>>>>> b16ca4290a88ff8240c2efdfd8cef235f3639d3d
   notLoggedInBlock.hide();
   loggedInNotRated.hide();
   loggedInAndRated.hide();
