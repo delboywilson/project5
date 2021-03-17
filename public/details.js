@@ -63,6 +63,7 @@ function displayRating(rating, ratingSelector) {
 
 // need to add function that pushes to rating to the db, then recalls the function to show the updated rating for the movie
 async function getData() {
+<<<<<<< HEAD
     try {
         let data = await $.getJSON("/ratings");
         console.log(data);
@@ -70,8 +71,27 @@ async function getData() {
         console.log(e);
     }
 }
+=======
+  try {
+    let data = await $.getJSON("/ratings");
+    console.log(data);
+  } catch (e) {
+    console.log(e);
+  }
+}
 
 // logic for rendering ratings block below
+
+let notLoggedInBlock = $(".state-not-logged");
+let loggedInNotRated = $(".state-logged-in-not-rated");
+let loggedInAndRated = $(".state-logged-and-rated");
+>>>>>>> b16ca4290a88ff8240c2efdfd8cef235f3639d3d
+
+function showUserRating(rating){
+  let userRatingSpan = loggedInAndRated.find(".user-rating-span")
+  userRatingSpan.html(rating)
+  loggedInAndRated.show()
+}
 
 
 let notLoggedInBlock = $(".state-not-logged");
@@ -87,7 +107,10 @@ function showUserRating(rating){
 
 async function updateRatingBlock() {
   
+<<<<<<< HEAD
 
+=======
+>>>>>>> b16ca4290a88ff8240c2efdfd8cef235f3639d3d
   notLoggedInBlock.hide();
   loggedInNotRated.hide();
   loggedInAndRated.hide();
@@ -119,7 +142,6 @@ rateButton.on("click",
         postData()
     })
 
-
 async function postData() {
     try {
       let movieId = getMovieId();
@@ -133,6 +155,7 @@ async function postData() {
     console.log(e);
   }
 }
+
 
 // need to add check if user is logged in, else prevent rating and encourage login/signup (maybe just alert - "you need to be logged in to do that"?)
 getMovie();
