@@ -7,7 +7,9 @@ const initializePassport = require("../passport-config");
 
 router.get("/:movieId", (req, res) => {
   console.log(req.user);
-  res.render("pages/details");
+    res.render("pages/details", {
+        isAuthenticated: req.user != undefined
+    });
 });
 
 module.exports = router;
