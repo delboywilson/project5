@@ -2,13 +2,12 @@
   "ExpandedNodes": [
     "",
     "\\public",
-    "\\public\\assets",
-    "\\public\\js",
     "\\routes",
+    "\\sql",
     "\\views",
     "\\views\\pages",
     "\\views\\partials"
   ],
-  "SelectedNode": "\\public\\details.js",
+  "SelectedNode": "\\routes\\home.js",
   "PreviewInSolutionExplorer": false
 }
