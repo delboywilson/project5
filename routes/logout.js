@@ -12,7 +12,7 @@ router.delete("/", (req, res) => {
   req.logOut();
   console.log(req.isAuthenticated());
   req.flash("success", "Logged out. See you soon!");
-  res.redirect("/login");
+  res.redirect("/home");
 });
 
 module.exports = router;
