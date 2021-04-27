@@ -4,7 +4,8 @@ INCO Academny's INCODE Web Development Bootcamp
 
 Project 5 - Consume an API
 
-## Technologies used: HTML, CSS, Javascript, JQuery
+## Technologies used:
+HTML, CSS, Javascript, JQuery
 
 ## Contributors
 
